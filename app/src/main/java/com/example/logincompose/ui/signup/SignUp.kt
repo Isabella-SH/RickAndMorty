@@ -1,4 +1,4 @@
-package com.example.logincompose.ui.login
+package com.example.logincompose.ui.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 //solo si el valor del estado asociado cambia, el oposable se puede refrescar
 @Composable //para que composable sea cambiante debe de tener un estado asociado
-fun Login(){
+fun SignUp(){
 
     //este es un estado, ya que es un estado cambiante
     val username= remember{ mutableStateOf("") }
@@ -29,9 +29,9 @@ fun Login(){
 
 
     Column (verticalArrangement = Arrangement.Center, //para centrarlo
-            modifier = Modifier.fillMaxSize(), //para indicar que utiliza tod el espacio de largo
-            horizontalAlignment = Alignment.CenterHorizontally //para indicar que utiliza tod el espacio de ancho
-           ) {
+        modifier = Modifier.fillMaxSize(), //para indicar que utiliza tod el espacio de largo
+        horizontalAlignment = Alignment.CenterHorizontally //para indicar que utiliza tod el espacio de ancho
+    ) {
 
 
         //OutlinedTextField: cajita de texto que se puede editar
@@ -63,11 +63,11 @@ fun Login(){
         )
 
         Button(onClick = { }) {
-            Text(text = "Sign in")
+            Text(text = "Sign up")
         }
 
         TextButton(onClick = { }) {
-            Text(text = "Sign up")
+            Text(text = "Login")
         }
 
     }
@@ -75,9 +75,9 @@ fun Login(){
 
 @Preview
 @Composable
-fun LoginPreview(){
+fun SignUpPreview(){
 
-    Login()
+    SignUp()
 }
 
 
