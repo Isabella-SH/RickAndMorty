@@ -26,6 +26,8 @@ fun SignUp(){
     //este es un estado, ya que es un estado cambiante
     val username= remember{ mutableStateOf("") }
     val password= remember{ mutableStateOf("") }
+    val confirmPassword= remember{ mutableStateOf("") }
+
 
 
     Column (verticalArrangement = Arrangement.Center, //para centrarlo
@@ -57,6 +59,20 @@ fun SignUp(){
             },
             visualTransformation = PasswordVisualTransformation(),
             placeholder = { Text(text = "Password")},
+
+            modifier=Modifier.fillMaxWidth() //para que ocupe tod el ancho disponible
+
+        )
+
+        OutlinedTextField(
+            value = confirmPassword.value,
+
+            //nueva cadena de valor al que cambiara el value
+            onValueChange = {newValue->
+                confirmPassword.value=newValue  // sera el nuevo valor que se escriba en la cajita de texto
+            },
+            visualTransformation = PasswordVisualTransformation(),
+            placeholder = { Text(text = "Confirm Password")},
 
             modifier=Modifier.fillMaxWidth() //para que ocupe tod el ancho disponible
 
