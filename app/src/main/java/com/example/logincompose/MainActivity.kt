@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.logincompose.ui.theme.LoginComposeTheme
 import com.example.logincompose.ui.login.Login
+import com.example.logincompose.ui.signup.SignUp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +14,7 @@ class MainActivity : ComponentActivity() {
             LoginComposeTheme {
                 // A surface container using the 'background' color from the theme
 
-                Login()
+                SignUp()
             }
         }
     }
