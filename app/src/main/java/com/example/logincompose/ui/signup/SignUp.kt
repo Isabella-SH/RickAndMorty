@@ -79,7 +79,7 @@ fun SignUp(){
         )
 
         Button(onClick = { }) {
-            Text(text = "Sign up")
+            Text(text = "Register")
         }
 
         TextButton(onClick = { }) {
