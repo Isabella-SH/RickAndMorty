@@ -1,5 +1,6 @@
 package com.example.logincompose.ui.signup
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +15,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.logincompose.ui.data.remote.UserRequest
+import com.example.logincompose.ui.repository.UserRepository
+import com.example.logincompose.utils.Result
 
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -78,7 +83,20 @@ fun SignUp(){
 
         )
 
-        Button(onClick = { }) {
+        val context= LocalContext.current
+        val userRepository=UserRepository()
+        val userRequest=UserRequest(username.value, password.value)
+
+        Button(onClick = {
+
+            userRepository.register(userRequest){result->
+
+                if(result is Result.Success){
+                    val id=result.data!!.id
+                    Toast.makeText(context,"$id",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }) {
             Text(text = "Register")
         }
 
