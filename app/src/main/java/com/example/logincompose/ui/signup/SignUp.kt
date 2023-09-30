@@ -83,8 +83,7 @@ fun SignUp(viewModel: SignUpViewModel){
 
         Button(onClick = {
 
-
-
+            viewModel.register()
 
         }) {
             Text(text = "Register")
