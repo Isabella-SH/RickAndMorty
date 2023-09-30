@@ -2,14 +2,14 @@ package com.example.logincompose.ui.signup
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.logincompose.ui.data.remote.UserRequest
-import com.example.logincompose.ui.repository.UserRepository
+import com.example.logincompose.data.remote.UserRequest
+import com.example.logincompose.repository.UserRepository
 
 //View model: sirve para preservar los estados
 //"almacena los datos relacionados con la app que no se destruyen cuando el framework de Android destruye la actividad o el fragmento y los recrea"
 //es mejor colocar esta clase en conjunto a la clase a la que afecta
 //todos los estados deben de estar aqui
-class SignUpViewModel(val userRepository: UserRepository =UserRepository()):ViewModel() {
+class SignUpViewModel(val userRepository: UserRepository = UserRepository()):ViewModel() {
 
                                      //USERNAME
     private var _username=MutableLiveData<String>()
@@ -47,7 +47,7 @@ class SignUpViewModel(val userRepository: UserRepository =UserRepository()):View
     //FUNCION DE ACCION DEL BOTON REGISTRARSE
     fun register(){
 
-        val userRequest=UserRequest(username.value!!,password.value!!)
+        val userRequest= UserRequest(username.value!!,password.value!!)
         userRepository.register(userRequest){}
     }
 

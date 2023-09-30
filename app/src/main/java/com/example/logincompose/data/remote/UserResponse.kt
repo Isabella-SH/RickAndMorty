@@ -1,4 +1,4 @@
-package com.example.logincompose.ui.data.remote
+package com.example.logincompose.data.remote
 
 //RESPONSE: Lo QUErecibo al hacer la consulta
 data class UserResponse (
