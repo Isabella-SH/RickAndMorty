@@ -15,10 +15,13 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue                 //!!!!!!!
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,6 +49,9 @@ fun CharacterList(viewModel: CharacterListViewModel){
 
 @Composable
 fun CharacterCard(character: Character) {
+
+    //creo un estado que guarde si el character es un favorito o no
+    val isFavorite= remember{ mutableStateOf(false) }
 
     Card(modifier = Modifier.padding(8.dp)) {
 
@@ -93,11 +99,25 @@ fun CharacterCard(character: Character) {
             }
 
             IconButton(
-                onClick = { /*TODO*/ },
+                onClick = {
+
+                    if(isFavorite.value){
+                        //delete()
+                    }else{
+                        //insert()
+                    }
+
+                    //cada que de click, el valor que tenia, ahora sera lo contrario
+                    isFavorite.value = !isFavorite.value
+
+                },
                 modifier = Modifier.weight(1f)
             )
             {
-                Icon(Icons.Filled.Star,null)
+                Icon(Icons.Filled.Star,
+                    null,
+                    //si esta marcado como favorito cambia a un color "primary", sino sera un color "onSurface"
+                    tint = if(isFavorite.value)MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface)
             }
         }
     }
