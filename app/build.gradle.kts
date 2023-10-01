@@ -66,6 +66,10 @@ dependencies {
     //compose image
     implementation("com.github.skydoves:landscapist-glide:2.1.9")
 
+    //navigation
+    val nav_version="2.7.3"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
