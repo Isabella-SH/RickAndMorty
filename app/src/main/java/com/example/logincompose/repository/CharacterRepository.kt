@@ -1,5 +1,7 @@
 package com.example.logincompose.repository
 
+import com.example.logincompose.data.local.CharacterDao
+import com.example.logincompose.data.local.CharacterEntity
 import com.example.logincompose.data.model.Character
 import com.example.logincompose.data.model.CharacterResponse
 import com.example.logincompose.data.remote.ApiClient
@@ -11,8 +13,10 @@ import retrofit2.Response
 
 //kotlin->class
 
-//VA A TRAER LOS DATOS, debe tener lomismo que el servicio!!!!!!!!!!
+//VA A TRAER LOS DATOS, debe tener lo mismo que el servicio!!!!!!!!!!
+//TAMBIEN DEBE IMPLEMNETAR LOS METODOS DEL DAO
 class CharacterRepository(
+  private val characterDao: CharacterDao, //al llamarla desde view model, inicializa a characterdao
   private val characterService:CharacterService =ApiClient.getCharacterService()
 
 ) {
@@ -30,9 +34,16 @@ class CharacterRepository(
         call: Call<CharacterResponse>,
         response: Response<CharacterResponse>
       ) {
-
         if(response.isSuccessful){
 
+          //en esta variable guardo todos los characters que se obtuvo del response
+          val characters=response.body()!!.characters
+
+          //de toda esta lista, busco en cada uno
+          characters.forEach{character->
+             //si este character es encontrado en la base de datos, esta marcado como favorito
+            character.isFavorite=characterDao.getById(character.id) !=null
+          }
           callback(Result.Success(data=response.body()!!))
         }
 
@@ -66,6 +77,17 @@ class CharacterRepository(
       }
     })
   }
+
+  //elimina un favorito
+  fun delete(id:Int){
+    characterDao.delete(CharacterEntity(id))
+  }
+
+  //guarda un favorito
+  fun save(id:Int){
+    characterDao.save(CharacterEntity(id))
+  }
+
 
 
 }

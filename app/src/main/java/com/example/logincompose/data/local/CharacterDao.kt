@@ -26,8 +26,10 @@ interface CharacterDao {
     @Delete
     fun delete(character: CharacterEntity)
 
+
+    //para llamar a todos mir favoritos, definirla en el repository
     @Query("select * from characters")
-    fun getAll(id:Int):List<CharacterEntity>
+    fun getAll():List<CharacterEntity>
 
 
 }

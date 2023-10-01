@@ -13,7 +13,8 @@ data class Character(
     val species: String,
     val gender: String,
     val status: String,
-    val image: String
+    val image: String,
+    var isFavorite: Boolean  //saber si es favorito o no
 )
 
 data class CharacterResponse(
