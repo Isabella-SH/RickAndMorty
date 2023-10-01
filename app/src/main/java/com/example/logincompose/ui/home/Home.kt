@@ -16,12 +16,42 @@ fun Home() {
     val navController= rememberNavController()
     val viewModel:CharacterListViewModel= viewModel()
 
-    NavHost(navController = navController, startDestination = "CharacterList" ){
+    NavHost(
+        navController = navController,
+        startDestination = BottomNavigationScreen.CharacterList.route //inicia mostrando la lista de characters
+    ){
 
-        composable("CharacterList"){
+        composable(BottomNavigationScreen.CharacterList.route){
             CharacterList(viewModel)
         }
 
+        composable(BottomNavigationScreen.Favorites.route){
+
+        }
     }
 
+    //crear iteraccion con botones
+    val bottomNavegationItems=listOf(
+        BottomNavigationScreen.CharacterList,
+        BottomNavigationScreen.Favorites
+    )
+
 }
+
+//creamos clase sellada
+sealed class BottomNavigationScreen(val route: String){
+
+    object CharacterList: BottomNavigationScreen("CharacterList")
+    object Favorites: BottomNavigationScreen("Favorites")
+}
+
+
+
+
+
+
+
+
+
+
+
