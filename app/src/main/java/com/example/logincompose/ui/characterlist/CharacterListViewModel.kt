@@ -28,4 +28,14 @@ class CharacterListViewModel (
         }
     }
 
+    //borrar de favoritos
+    fun delete(id:Int){
+        characterRepository.delete(id)
+    }
+
+    //guardar como favoritos
+    fun save(id:Int){
+        characterRepository.save(id)
+    }
+
 }
