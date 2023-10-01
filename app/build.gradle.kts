@@ -44,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
     packaging {
         resources {
@@ -55,7 +55,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.10")
+    implementation("androidx.core:core-ktx:1.9.0")
 
     //architecture components
     val lifecycleVersion = "2.6.2"

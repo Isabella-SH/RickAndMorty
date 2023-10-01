@@ -25,14 +25,13 @@ fun Home() {
 
     val navController= rememberNavController()
 
-
     //crear iteraccion con botones
     val bottomNavegationItems=listOf(
         BottomNavigationScreen.CharacterList,
         BottomNavigationScreen.Favorites
     )
 
-    //esta sera la parte de navegacion
+    //esta sera la parte de navegacion en la parte inferior
     Scaffold(
         bottomBar={
             AppBottomNavegation(navController,bottomNavegationItems)
