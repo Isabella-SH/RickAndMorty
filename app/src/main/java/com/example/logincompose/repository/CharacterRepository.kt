@@ -10,7 +10,7 @@ import retrofit2.Response
 
 //kotlin->class
 class CharacterRepository(
-  val characterService:CharacterService =ApiClient.getCharacterService()
+  private val characterService:CharacterService =ApiClient.getCharacterService()
 
 ) {
 
