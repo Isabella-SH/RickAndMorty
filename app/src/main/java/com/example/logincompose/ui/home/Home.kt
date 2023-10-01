@@ -88,7 +88,7 @@ fun Main(navController: NavHostController, modifier: Modifier){
         }
 
         composable(BottomNavigationScreen.Favorites.route){
-            Favorites()  //aca llamamos a la entidad que cree
+            Favorites(viewModel)  //aca llamamos a la entidad que cree
         }
     }
 }

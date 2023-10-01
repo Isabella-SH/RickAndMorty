@@ -43,8 +43,8 @@ class CharacterRepository(
 
           //de toda esta lista, busco en cada uno
           characters.forEach{character->
-             //si este character es encontrado en la base de datos local,quiere decir que esta marcado como favorito
-             //y  character.isFavorite deberia ser true, en caso no este en la bd local,  character.isFavorite sera false
+             //si este character su atributo de isFavorite es true, creamos un CharacterEntity que almacene este character
+             //de esta manera se va agregando characters a la base de datos local
             character.isFavorite=characterDao.getById(character.id) !=null
           }
           callback(Result.Success(data=response.body()!!.characters))
@@ -86,10 +86,10 @@ class CharacterRepository(
     //en el Dao elimino un CharacterEntity con la informacion de un character:Character
     characterDao.delete(CharacterEntity(
       character.id,
+      character.image,
       character.name,
       character.status,
-      character.gender,
-      character.image)
+      character.gender)
     )
     //luego indica que el atributo de isFavorite ahora es false
     character.isFavorite=false
@@ -100,13 +100,20 @@ class CharacterRepository(
     //en el Dao guardo un CharacterEntity con la informacion de un character:Character
     characterDao.save(CharacterEntity(
       character.id,
+      character.image,
       character.name,
       character.status,
-      character.gender,
-      character.image)
+      character.gender)
     )
     //luego indica que el atributo de isFavorite ahora es true
     character.isFavorite=true
+  }
+
+
+  //devuelve todos los favoritos
+  fun getAllFavorites():List<CharacterEntity>{
+    //en el Dao llamo al metodo que devuelve todos los favoritos al realizar el query
+    return characterDao.getAll()
   }
 
 }

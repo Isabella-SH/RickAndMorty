@@ -2,6 +2,7 @@ package com.example.logincompose.ui.characterlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.logincompose.data.local.CharacterEntity
 import com.example.logincompose.data.model.Character
 import com.example.logincompose.repository.CharacterRepository
 import com.example.logincompose.utils.Result
@@ -38,4 +39,22 @@ class CharacterListViewModel (
         characterRepository.save(character)
     }
 
+    //devuelva la lista de CharacterEntity
+    fun getFavoriteCharacters(): List<CharacterEntity> {
+        return characterRepository.getAllFavorites()
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
