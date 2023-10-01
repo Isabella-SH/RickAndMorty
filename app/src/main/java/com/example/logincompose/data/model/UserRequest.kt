@@ -1,4 +1,4 @@
-package com.example.logincompose.data.remote
+package com.example.logincompose.data.model
 
 
 //REQUEST: lo que envio de respuesta

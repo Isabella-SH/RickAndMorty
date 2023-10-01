@@ -2,7 +2,7 @@ package com.example.logincompose.ui.signup
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.logincompose.data.remote.UserRequest
+import com.example.logincompose.data.model.UserRequest
 import com.example.logincompose.repository.UserRepository
 
 //View model: sirve para preservar los estados

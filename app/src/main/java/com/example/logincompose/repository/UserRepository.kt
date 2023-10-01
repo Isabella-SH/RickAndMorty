@@ -1,8 +1,8 @@
 package com.example.logincompose.repository
 
 import com.example.logincompose.data.remote.ApiClient
-import com.example.logincompose.data.remote.UserRequest
-import com.example.logincompose.data.remote.UserResponse
+import com.example.logincompose.data.model.UserRequest
+import com.example.logincompose.data.model.UserResponse
 import com.example.logincompose.data.remote.UserService
 import com.example.logincompose.utils.Result
 import retrofit2.Call
