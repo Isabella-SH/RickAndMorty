@@ -11,7 +11,7 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        instance=App()
+        instance=this
     }
 
     //objeto que en algun momento se va a inicializar
