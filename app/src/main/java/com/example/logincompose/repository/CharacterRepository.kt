@@ -84,7 +84,13 @@ class CharacterRepository(
   //elimina un favorito
   fun delete(character: Character){
     //en el Dao elimino un CharacterEntity con la informacion de un character:Character
-    characterDao.delete(CharacterEntity(character.id))
+    characterDao.delete(CharacterEntity(
+      character.id,
+      character.name,
+      character.status,
+      character.gender,
+      character.image)
+    )
     //luego indica que el atributo de isFavorite ahora es false
     character.isFavorite=false
   }
@@ -92,7 +98,13 @@ class CharacterRepository(
   //guarda un favorito
   fun save(character: Character){
     //en el Dao guardo un CharacterEntity con la informacion de un character:Character
-    characterDao.save(CharacterEntity(character.id))
+    characterDao.save(CharacterEntity(
+      character.id,
+      character.name,
+      character.status,
+      character.gender,
+      character.image)
+    )
     //luego indica que el atributo de isFavorite ahora es true
     character.isFavorite=true
   }
