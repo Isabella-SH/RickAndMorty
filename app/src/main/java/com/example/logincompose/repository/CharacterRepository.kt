@@ -1,5 +1,7 @@
 package com.example.logincompose.repository
 
+import com.example.logincompose.App
+import com.example.logincompose.data.local.AppDataBase
 import com.example.logincompose.data.local.CharacterDao
 import com.example.logincompose.data.local.CharacterEntity
 import com.example.logincompose.data.model.Character
@@ -16,7 +18,7 @@ import retrofit2.Response
 //VA A TRAER LOS DATOS, debe tener lo mismo que el servicio!!!!!!!!!!
 //TAMBIEN DEBE IMPLEMNETAR LOS METODOS DEL DAO
 class CharacterRepository(
-  private val characterDao: CharacterDao, //al llamarla desde view model, inicializa a characterdao
+  private val characterDao: CharacterDao= AppDataBase.getInstance(App.instance).characterDao(), //al llamarla desde view model, inicializa a characterdao
   private val characterService:CharacterService =ApiClient.getCharacterService()
 
 ) {
