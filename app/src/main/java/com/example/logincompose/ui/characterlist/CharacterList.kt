@@ -42,16 +42,27 @@ fun CharacterList(viewModel: CharacterListViewModel){
 
     LazyColumn{
         items(characters){character->
-            CharacterCard(character)
+            CharacterCard(character,
+
+                //defino las fiunciones y llamo su implementacion del viw model
+                delete = {
+                    viewModel.delete(character)
+                },
+
+                insert={
+                    viewModel.save(character)
+                }
+            )
         }
     }
 }
 
-@Composable
-fun CharacterCard(character: Character) {
+@Composable                             //lamo a los metodos del view model para realizar lo de favorite
+fun CharacterCard(character: Character, delete:()->Unit, insert:()->Unit) {
 
     //creo un estado que guarde si el character es un favorito o no
     val isFavorite= remember{ mutableStateOf(false) }
+    isFavorite.value=character.isFavorite //actualizamos el valor de favorito tal como lo tiene el character
 
     Card(modifier = Modifier.padding(8.dp)) {
 
@@ -101,10 +112,10 @@ fun CharacterCard(character: Character) {
             IconButton(
                 onClick = {
 
-                    if(isFavorite.value){
-                        //delete()
-                    }else{
-                        //insert()
+                    if(isFavorite.value){ //si es falso(valor inicial)
+                        delete()  //borralo de favoritos
+                    }else{ //si es true
+                        insert()  //guardalo como favorito
                     }
 
                     //cada que de click, el valor que tenia, ahora sera lo contrario

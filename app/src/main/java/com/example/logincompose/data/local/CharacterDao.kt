@@ -19,9 +19,10 @@ interface CharacterDao {
     @Insert  //funcion de insertar
     fun save(character:CharacterEntity)
 
-    @Query("select * from characters where:id")
+                   //es true cuando el id original sea igual al id que se esta probando
+    @Query("select * from characters where id=:idparaprobar")
     //debe encontrar un characterEntity, sino encuentra, es nulo(?)
-    fun getById(id:Int):CharacterEntity?
+    fun getById(idparaprobar:Int):CharacterEntity?
 
     @Delete
     fun delete(character: CharacterEntity)

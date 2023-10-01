@@ -23,19 +23,19 @@ class CharacterListViewModel (
 
         characterRepository.getAll { result->
             if (result is Result.Success){
-                _characters.value=result.data!!.characters
+                _characters.value=result.data!!
             }
         }
     }
 
     //borrar de favoritos
-    fun delete(id:Int){
-        characterRepository.delete(id)
+    fun delete(character: Character){
+        characterRepository.delete(character)
     }
 
     //guardar como favoritos
-    fun save(id:Int){
-        characterRepository.save(id)
+    fun save(character: Character){
+        characterRepository.save(character)
     }
 
 }

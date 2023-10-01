@@ -24,7 +24,7 @@ class CharacterRepository(
 ) {
 
   //posibles resultados de consumir el api:
-  fun getAll(callback: (Result<CharacterResponse>) -> Unit){
+  fun getAll(callback: (Result<List<Character>>) -> Unit){
 
     val getAll=characterService.getAll()
 
@@ -43,10 +43,11 @@ class CharacterRepository(
 
           //de toda esta lista, busco en cada uno
           characters.forEach{character->
-             //si este character es encontrado en la base de datos, esta marcado como favorito
+             //si este character es encontrado en la base de datos local,quiere decir que esta marcado como favorito
+             //y  character.isFavorite deberia ser true, en caso no este en la bd local,  character.isFavorite sera false
             character.isFavorite=characterDao.getById(character.id) !=null
           }
-          callback(Result.Success(data=response.body()!!))
+          callback(Result.Success(data=response.body()!!.characters))
         }
 
       }
@@ -81,15 +82,19 @@ class CharacterRepository(
   }
 
   //elimina un favorito
-  fun delete(id:Int){
-    characterDao.delete(CharacterEntity(id))
+  fun delete(character: Character){
+    //en el Dao elimino un CharacterEntity con la informacion de un character:Character
+    characterDao.delete(CharacterEntity(character.id))
+    //luego indica que el atributo de isFavorite ahora es false
+    character.isFavorite=false
   }
 
   //guarda un favorito
-  fun save(id:Int){
-    characterDao.save(CharacterEntity(id))
+  fun save(character: Character){
+    //en el Dao guardo un CharacterEntity con la informacion de un character:Character
+    characterDao.save(CharacterEntity(character.id))
+    //luego indica que el atributo de isFavorite ahora es true
+    character.isFavorite=true
   }
-
-
 
 }
