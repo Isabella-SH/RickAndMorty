@@ -28,13 +28,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.logincompose.data.model.Character
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 //otlin->file
 @Composable
-fun CharacterList(viewModel: CharacterListViewModel){
+fun CharacterList(viewModel: CharacterListViewModel, navigateToCharacterDetail: (String) -> Unit){
 
     //instancia del view model
     val characters:List<Character> by viewModel.characters.observeAsState(listOf())
