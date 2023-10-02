@@ -61,7 +61,7 @@ class CharacterRepository(
   }
 
 
-  fun getById(id:String,callback: (Result<Character>) -> Unit){
+  fun getById(id:Int,callback: (Result<Character>) -> Unit){
 
     val getById=characterService.getById(id)
 

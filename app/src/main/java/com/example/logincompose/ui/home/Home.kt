@@ -6,6 +6,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -87,52 +88,36 @@ fun Main(navController: NavHostController, modifier: Modifier){
     ){
 
         composable(BottomNavigationScreen.CharacterList.route){
-            CharacterList(viewModel){id->
-                navController.navigate("${Routes.CharacterDetail.route}/$id") //navego hacia la ruta de HeroDetail
-            }
+            CharacterList(viewModel,navController)
         }
 
-        //para pasar un valor al composable
-        composable(
-            route= Routes.CharacterDetail.routeWithArgument,
+        //para poder visualizar los detalles de cada character
 
-            //en este caso el valor del id del heroe del que quiero ver su detalle, aca lo pasa como estring
-            arguments= listOf(navArgument(Routes.CharacterDetail.argument) {type= NavType.StringType})
-        ){backStackEntry->
-
-            //obtengo el valor del id que le pase
-            val id=backStackEntry.arguments?.getString("id") as String
-
-            //luego le paso el Compose
-            CharacterDetail(viewModel,id)
-        }
 
         composable(BottomNavigationScreen.Favorites.route){
             Favorites(viewModel)  //aca llamamos a la entidad que cree
         }
+
+        composable(
+            BottomNavigationScreen.CharacterDetail.route + "/{characterId}",
+            arguments = listOf(navArgument("characterId") { type = NavType.IntType })
+        ) { navBackStackEntry ->
+            val characterId = navBackStackEntry.arguments?.getInt("characterId")
+            characterId?.let {
+                CharacterDetail(viewModel, it)
+            }
+        }
+
+
     }
 }
-
 
 //creamos clase sellada
 sealed class BottomNavigationScreen(val route: String, val icon: ImageVector){
     object CharacterList: BottomNavigationScreen("CharacterList", Icons.Filled.Home)
     object Favorites: BottomNavigationScreen("Favorites",  Icons.Filled.Favorite)
+    object CharacterDetail: BottomNavigationScreen("CharacterDetail", Icons.Default.Info)
 }
-
-sealed class Routes(val route:String){
-
-    //creo un objeto que llame a mi clase CharacterDetail
-    object CharacterDetail: Routes("CharacterDetail"){   //este nombre con el de abajo debe ser el mismo
-
-        //para indicar el id del character que quiero ver
-        const val routeWithArgument="CharacterDetail/{id}" //este nombre con el de arriba debe ser el mismo
-        const val argument="id"
-    }
-}
-
-
-
 
 
 

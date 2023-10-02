@@ -29,7 +29,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 //kotlin->file
 @Composable
-fun CharacterDetail(viewModel: CharacterListViewModel, id:String){
+fun CharacterDetail(viewModel: CharacterListViewModel, id:Int){
 
     // Obtenemos el estado del personaje
     val oneCharacterState: Result<Character>? by viewModel.oneCharacter.observeAsState()

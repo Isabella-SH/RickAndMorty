@@ -16,7 +16,7 @@ interface CharacterService {
 
     //busca en el json solo un character por su id
     @GET("character/{id}")
-    fun getById(@Path("id") id:String):Call<Character> //devuelve un character
+    fun getById(@Path("id") id:Int):Call<Character> //devuelve un character
 
 
 }

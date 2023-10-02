@@ -1,6 +1,7 @@
 package com.example.logincompose.ui.characterlist
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,12 +31,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.logincompose.data.model.Character
+import com.example.logincompose.ui.home.BottomNavigationScreen
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 //otlin->file
 @Composable
-fun CharacterList(viewModel: CharacterListViewModel, navigateToCharacterDetail: (String) -> Unit){
+fun CharacterList(viewModel: CharacterListViewModel, navController: NavHostController){
 
     //instancia del view model
     val characters:List<Character> by viewModel.characters.observeAsState(listOf())
@@ -43,6 +45,7 @@ fun CharacterList(viewModel: CharacterListViewModel, navigateToCharacterDetail: 
 
     LazyColumn{
         items(characters){character->
+
             CharacterCard(character,
 
                 //defino las fiunciones y llamo su implementacion del viw model
@@ -52,6 +55,9 @@ fun CharacterList(viewModel: CharacterListViewModel, navigateToCharacterDetail: 
 
                 insert={
                     viewModel.save(character)
+                },
+                onClick={
+                    navController.navigate(BottomNavigationScreen.CharacterDetail.route + "/${character.id}")
                 }
             )
         }
@@ -59,13 +65,13 @@ fun CharacterList(viewModel: CharacterListViewModel, navigateToCharacterDetail: 
 }
 
 @Composable                             //lamo a los metodos del view model para realizar lo de favorite
-fun CharacterCard(character: Character, delete:()->Unit, insert:()->Unit) {
+fun CharacterCard(character: Character, delete:()->Unit, insert:()->Unit, onClick: () -> Unit) {
 
     //creo un estado que guarde si el character es un favorito o no
     val isFavorite= remember{ mutableStateOf(false) }
     isFavorite.value=character.isFavorite //actualizamos el valor de favorito tal como lo tiene el character
 
-    Card(modifier = Modifier.padding(8.dp)) {
+    Card(modifier = Modifier.padding(8.dp).clickable(onClick=onClick)) {
 
         Row(modifier = Modifier
             .fillMaxWidth()

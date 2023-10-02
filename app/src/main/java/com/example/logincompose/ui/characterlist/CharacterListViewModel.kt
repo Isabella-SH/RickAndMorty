@@ -53,7 +53,7 @@ class CharacterListViewModel (
     }
 
     //devuelva un Character, con el metodo del propio repository, no del Dao
-    fun getCharacterById(id:String){
+    fun getCharacterById(id:Int){
 
         //_oneCharacter.value=null // Resetea el estado antes de hacer la llamada
         characterRepository.getById(id){result->
